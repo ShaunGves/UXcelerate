@@ -1,0 +1,6 @@
+{
+  "name": "AEGIS-SAR Tactical Command",
+  "description": "Subterranean search and rescue robotic fleet command system with live LiDAR SLAM mapping, fleet telemetry, acoustic detection intel, and evacuation route planning.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

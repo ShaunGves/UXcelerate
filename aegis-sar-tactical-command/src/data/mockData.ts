@@ -1,0 +1,278 @@
+import { IntelItem, RobotUnit, WaypointNode, HazardTask } from '../types';
+
+export const AEGIS_EMBLEM_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDHihsk-G1ToLXMaEL-UpIrILGvmSSHyqPDR4DZe_egrh-XyMizuzq02NVmB_uWOr5_b9KjYD0K-X8QfFDmKk8NdTIIz19R7o3O9UzwZok-wADzpMECIPzbQlDoIyaM6mJG_r84HjG8AlfI40g91HFiVVuTErbN5VLw7iEIxmWHriCTMnWsJg3ls0MAFCb67YMuDdxVtQl3l_jpjR1NA292VASNI8R3WA5saS4gwiXw3J0C_FFevXUv';
+
+export const TALON_THERMAL_STREAM_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBti2VOaHRSyBpy_QuTQUBdbj-FXXPWmBHkgxuvl0tDjsa53luvcbs7qwuWtZXkDV6IY3qL8lIpD1dyDaS6TbGgsbWJjShFzI_O4xPKaiv3foE_4bij5dHTNYGUon0j0iZhsM9UazR-dLda89ioSLZhxZ_0qrAqxdZDdkmisxFmw9K0Qd7rlkxQBl-bHZ2jtowjDP_6eGU4VeG0ScZaGlnUOR2DgBNzho_ke0t-uQNEren0CI0SvGF7';
+
+export const VANGUARD_QUADRUPED_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCZthBfek_iraLkkLArfi9yYcASiYvOIuJ7GnHcgba2vpVUjmm10rL6pAZy1tTzYpwALqSFisv0BrVCs2cjomvO2rbtHcorVyl8q84A-UbLEFZFfYIJFrDXRjW-WqFsvgEBVwYHwBqbTFfBaieApV-h5O2GMvIJds3NzQS6NxmSAHTADyh8wtw5KHoGKjY-Wq1lLthgX0LBB2muWESrgqXAjSk1q6VYw5F14eaUn1WGBK_99fp07F9c';
+
+export const INTEL_CONTACT_04_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDwFDxijh6TI3DvtaCrvt6Jggoox8eEXyqHVtuYLCvItEVe0v7sXw-Ey4aihMpfderGWorxPsNmnTOtph_jEykcgwboJI2tJW4lssnJe5AYD5D2AqpDhD9vwfilf2mrFHh6T3UHtyDmW8wybu2MwMc_L7MaPFcxop6c6npPnn3JTpqZRXvj89R14mw4p8KaDGrMpTJP2vEocigzXVqIvduF7GhObX2TNPvazEP7XyZgLEqLjHjnNypw';
+
+export const INTEL_VOID_ROUTE_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCeknnrE-pWMKZIoVU_gucTIoW7fsIbDc-_3ROEik1utXiFntMDY1TaWL1PdTfSqWAV3CG0jFfcndvgV8NW8jRoBjgtV_9xGGZ85545QDNCMXYWu_iTbafoRAwgsz1bb4Xuv_MwL3mdvRAgCyHGST4k9VpDhgVoBpKE5rSo6QE2uLfUqlqpLwkotsGwcfHmh9yZ5zoOjziYbL9gpVh6KH8H4cekDahTqV5R9LYOu77DR30CE2pyHcHm';
+
+export const INTEL_GAS_HAZARD_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDUpi9YM8K6VENFsIgpG7KSISyxJ1BKqSvMRtyURaE4zav9Jh2wI5JGuRhnTUCs8ucbjdlbuCMuG7aUBfmmppwgNxMKLMk_qCXH2f_IUJ9yvGf6kECjn0w-x-yBPgpGStPfL7isXXbsBZuEoHcrs5TbbLq6ZUWwVYiE7oSLsS60OQQnOorIKKpAMixELXmLEKWfDm8SJiYkP3RSwMJclgVuZ-doii8TM0SoPrdaWL3MM2TjWuY8rskF';
+
+export const ROUTE_OBSTACLE_IR_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAv5h_KRNkgMuhHkh6bY27ToSfKs9CxmUStrkbCtiXMLWc64n3au494GNyypRJJI_LZmaIC6Kzd4flHbDFS6NI5CJKnXvZNAB_2VOfxuD4gTM1an57mTx5ZYiGPeuAm-zjqlrQ-sifBS9s1VoZUCTbht_3Em-z9qNcgu3rDx6zbqtwhHsrRQUS7bewweNeqOnR7iI7jRr6vAHJSqK4L296Zmbz5xs7Gd8ECWfp9VL_SB4nUB7LfwEwW';
+
+export const INITIAL_ROBOTS: RobotUnit[] = [
+  {
+    id: 'TALON-03',
+    callsign: 'Talon-3',
+    name: 'TALON-03',
+    type: 'Micro-Tracked Confined Crawler',
+    status: 'LIVE STREAM',
+    linkQuality: 'DIRECT MESH',
+    linkType: 'DIRECT MESH',
+    battery: 74,
+    location: 'SEC 4B • BASEMENT -2',
+    coords: 'MGRS 38SMB494886',
+    ambientTemp: '38°C AMBIENT',
+    missionStatus: 'Autonomous void search: Grid A-4 (1h 45m)',
+    imageUrl: TALON_THERMAL_STREAM_URL,
+    sensors: {
+      flir: true,
+      lidar: 'LOCK 30m',
+      seismic: 'ACOUSTIC',
+    },
+  },
+  {
+    id: 'SCOUT-02',
+    callsign: 'Scout-02',
+    name: 'SCOUT-02',
+    type: 'Hexapod Agile Surveyor',
+    status: 'AUTONOMOUS',
+    linkQuality: 'T-3m 12s CONTACT',
+    linkType: 'T-3m 12s CONTACT',
+    battery: 58,
+    location: 'TUNNEL SPINE • SHAFT C',
+    coords: 'MGRS 38SMB491882',
+    missionStatus: 'Traversing Faraday rubble corridor. Mapping fissure line and returning to Mesh Anchor 3.',
+    sensors: {
+      flir: true,
+      lidar: 'LOCK 15m',
+      seismic: 'ACOUSTIC HIT',
+    },
+  },
+  {
+    id: 'VANGUARD-01',
+    callsign: 'Vanguard-1',
+    name: 'VANGUARD-01',
+    type: 'Heavy Quadruped Relay Carrier',
+    status: 'BRIDGE ROOT',
+    linkQuality: '94% LINK',
+    linkType: '94% LINK',
+    battery: 88,
+    location: 'VOID PERIMETER STAGING',
+    coords: 'MGRS 38SMB492884',
+    missionStatus: 'Stationary Repeat Anchor with antenna array locked.',
+    imageUrl: VANGUARD_QUADRUPED_URL,
+    sensors: {
+      flir: true,
+      lidar: 'OMNI 50m',
+      seismic: 'SURFACE ECHO',
+    },
+    podsRemaining: 2,
+    totalPods: 4,
+  },
+];
+
+export const INITIAL_INTEL: IntelItem[] = [
+  {
+    id: 'INTEL-01',
+    title: 'Acoustic Tapping + CO2 Pulse',
+    category: 'survivor',
+    unit: 'Talon-03',
+    timestamp: '14:22:08 Z',
+    confidence: '92% CONF',
+    urgency: 'CRITICAL',
+    tagLabel: 'CONFIRMED CONTACT #04',
+    imageUrl: INTEL_CONTACT_04_URL,
+    radarDepth: '3.4m | SUB-VOID',
+    slabThickness: '45CM',
+    co2Level: 850,
+    respirationBpm: 14,
+    acousticPattern: '3-TAP SOS PATTERN (420 Hz)',
+    details: 'Subterranean sensor array #7 identified rhythmic tapping (3-3-3 SOS) corroborated by elevated CO2 and stable chest wall respiration.',
+    metrics: {
+      'Micro-Gas CO2': '850 PPM (SPIKE)',
+      'UWB Respiration': '14 BPM STABLE',
+    },
+    statusNote: 'UWB: VITALS DETECTED',
+  },
+  {
+    id: 'INTEL-02',
+    title: 'Shaft C → Boiler Room 01',
+    category: 'route',
+    unit: 'Scout-02',
+    timestamp: '14:19:40 Z',
+    urgency: 'ACCESSIBLE',
+    tagLabel: 'ACCESSIBLE VOID ROUTE',
+    imageUrl: INTEL_VOID_ROUTE_URL,
+    radarDepth: '80cm × 55cm CLEARANCE',
+    slabThickness: 'HUMAN CRAWLER VIABLE',
+    details: 'Passable crawl corridor for scouts, canine quadrupeds, and slim human rescue technicians. 0.2° tilt drift confirms stable structural envelope.',
+    metrics: {
+      'Debris Status': 'LIGHT AGGREGATE CLEARABLE',
+      'Tunnel Integrity': '99.4% SAFE',
+    },
+    statusNote: 'STABILITY CONFIRMED: 0.2° TILT DRIFT',
+  },
+  {
+    id: 'INTEL-03',
+    title: 'ACTIVE GAS LEAK & COMPRESSION COLLAPSE',
+    category: 'hazard',
+    unit: 'Vanguard-01',
+    timestamp: '14:15:12 Z',
+    urgency: 'EXTREME',
+    tagLabel: 'EXTREME HAZARD',
+    imageUrl: INTEL_GAS_HAZARD_URL,
+    radarDepth: 'ZONE 4 SOUTH SUB-SECTOR',
+    slabThickness: 'BUCKLING GIRDER',
+    details: 'CH4 reading at 14% LEL indicates explosive atmosphere. Main overhead girder deflection accelerating at +1.2mm/min.',
+    metrics: {
+      'Gas Concentration': '14% LEL CH4',
+      'Buckling Rate': '+1.2mm / min',
+    },
+    statusNote: 'CRITICAL LOAD BEARING ALERT',
+  },
+  {
+    id: 'INTEL-04',
+    title: 'Sub-Basement B-2 Secondary Acoustic Tap',
+    category: 'survivor',
+    unit: 'Scout-02',
+    timestamp: '14:08:35 Z',
+    confidence: '84% CONF',
+    urgency: 'CRITICAL',
+    tagLabel: 'SURVIVOR CONTACT #05',
+    radarDepth: '5.1m DEPTH',
+    details: 'Intermittent metal pipe reverberation recorded on passive acoustic sensor array behind elevator pit shear wall.',
+    metrics: {
+      'Estimated Depth': '5.1m',
+      'Confidence': '84% Corroborated',
+    },
+    statusNote: 'SEEKING VECTOR PATH',
+  },
+  {
+    id: 'INTEL-05',
+    title: 'Stairwell A Concrete Slab Obstruction',
+    category: 'hazard',
+    unit: 'Vanguard-01',
+    timestamp: '14:10:00 Z',
+    urgency: 'EXTREME',
+    tagLabel: 'IMPASSABLE BLOCKAGE',
+    radarDepth: 'STAIRWELL SHAFT A',
+    details: '1.2-ton precast slab collapsed cleanly across descent landing. Fully blocked for human stretcher teams.',
+    metrics: {
+      'Obstacle Mass': '1.2 Tons',
+      'Clearance': '0cm (Sealed)',
+    },
+    statusNote: 'BYPASS REQUIRED',
+  },
+  {
+    id: 'INTEL-06',
+    title: 'Secondary Corrugated Steel Mesh Web',
+    category: 'hazard',
+    unit: 'Talon-03',
+    timestamp: '13:58:12 Z',
+    urgency: 'MONITOR',
+    tagLabel: 'REBAR RESTRAINT',
+    radarDepth: 'CORRIDOR B JUNCTION',
+    details: 'High-tensile tangled wire mesh hanging from fractured beam. Breaching shears required before extraction.',
+    metrics: {
+      'Steel Diameter': '16mm Grade 60',
+      'Span': '2.4m',
+    },
+    statusNote: 'BREACH PENDING',
+  },
+  {
+    id: 'INTEL-07',
+    title: 'Mechanical Plenum Air Shaft Alpha',
+    category: 'structural',
+    unit: 'Vanguard-01',
+    timestamp: '13:45:00 Z',
+    urgency: 'MONITOR',
+    tagLabel: 'STRUCTURAL CAVITY',
+    radarDepth: 'CEILING CAVITY',
+    details: 'Intact air supply trunking offers unhindered line-of-sight for 900MHz RF antenna bounce.',
+    metrics: {
+      'RF Attenuation': '-12 dB (Low)',
+      'Dimensions': '120cm × 80cm',
+    },
+    statusNote: 'MESH RELAY TARGET',
+  },
+];
+
+export const INITIAL_WAYPOINTS: WaypointNode[] = [
+  {
+    step: '01',
+    title: 'North Staging Ramp',
+    status: 'CLEAR',
+    statusClass: 'bg-surface-container-highest text-tertiary',
+    description: 'Surface grade stable. Deployed base comms relay and heavy gear transit point.',
+    elevation: '+0.0M',
+    mappedBy: 'LOS VERIFIED',
+  },
+  {
+    step: '02',
+    title: 'Collapsed Stairwell A',
+    status: 'BLOCKED',
+    statusClass: 'bg-error-container text-on-error-container animate-pulse',
+    description: '1.2-ton precast slab collapsed at 14:10 UTC. Impassable for personnel.',
+    obstacleImage: ROUTE_OBSTACLE_IR_URL,
+    obstacleRef: '#CB-409',
+  },
+  {
+    step: '03',
+    title: 'BYPASS CORRIDOR 02',
+    status: 'NEWLY MAPPED',
+    statusClass: 'bg-surface-container-highest text-secondary-fixed-dim',
+    description: 'Ducting Crawlspace: Passable for scouts and crawler units. Low vertical clearance (54cm).',
+    clearance: '0.54M',
+    mappedBy: 'SCOUT-02 MAPPED',
+  },
+  {
+    step: '04',
+    title: 'Survivor S-04 Pocket',
+    status: 'TARGET REACHED',
+    statusClass: 'bg-tertiary/20 text-tertiary',
+    description: 'Acoustic pulse confirmed: 1 survivor conscious. Access corridor secure via Bypass 02 branch.',
+    vitals: 'PULSE: 78 BPM (STABLE)',
+    depth: '-14.2M',
+  },
+];
+
+export const INITIAL_HAZARD_TASKS: HazardTask[] = [
+  {
+    id: 'TASK-01',
+    title: 'Breach Rebar Web in Corridor B',
+    description: 'Tangled high-tensile steel mesh obstructing secondary stretcher withdrawal route.',
+    priority: 'PRIORITY 1',
+    tag: 'Heavy Breacher Bot / USAR Squad',
+    tagColor: 'text-primary',
+    assignedAsset: 'Unassigned',
+    status: 'PENDING',
+    actionLabel: 'Assign',
+  },
+  {
+    id: 'TASK-02',
+    title: 'Deploy Mesh Anchor Node 4',
+    description: 'Stairwell shaft RF null-zone. Drop acoustic repeater to maintain telemetry to Void B3.',
+    priority: 'RF REPEAT',
+    tag: 'Vanguard-01 (Payload Rdy)',
+    tagColor: 'text-secondary',
+    assignedAsset: 'Vanguard-01',
+    status: 'PENDING',
+    actionLabel: 'Deploy',
+  },
+  {
+    id: 'TASK-03',
+    title: 'Ventilate Gas Accumulation in Zone 4',
+    description: 'CH4 reading at 4.2% LEL. Human team deployment blocked until forced positive-air purge.',
+    priority: 'LETHAL ENV',
+    tag: 'Positive-Pressure Blower Squad',
+    tagColor: 'text-error',
+    assignedAsset: 'Hazmat Team Bravo',
+    status: 'PENDING',
+    actionLabel: 'Flag HAZMAT',
+  },
+];
